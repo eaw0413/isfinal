@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Game - Personal</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="startbootstrap-grayscale-gh-pages/assets/favicon.ico" />
+        <!-- Custom Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->        
+        <link href="startbootstrap-grayscale-gh-pages/css/styles.css" rel="stylesheet" />
+        <style>
+          .game-page {
+            min-height: 100vh;
+            padding: 8rem 0 4rem 0;
+            background: linear-gradient(180deg, #00aaff 0%, #99f8ff 50%, #90ee90 100%);
+          }
+
+          #gameArea {
+            position: relative;
+            width: 420px;
+            max-width: 100%;
+            height: 520px;
+            margin: auto;
+            border-radius: 1rem;
+            border: 3px solid #004e89;
+            background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 50%, #90ee90 100%);
+            overflow: hidden;
+            box-shadow: 0 1rem 3rem rgba(0, 145, 255, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.5);
+            position: relative;
+          }
+
+          #gameArea::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: radial-gradient(ellipse 100px 50px at 20% 30%, rgba(255, 255, 255, 0.8) 0%, transparent 70%),
+                        radial-gradient(ellipse 120px 60px at 80% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 70%),
+                        radial-gradient(ellipse 90px 45px at 50% 10%, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+            pointer-events: none;
+          }
+
+          #player {
+            position: absolute;
+            bottom: 20px;
+            width: 100px;
+            height: 40px;
+            left: 160px;
+            transition: left 0.05s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(180deg, #ff6b35 0%, #ff8c42 100%);
+            border-radius: 10px 10px 0 0;
+            border: 2px solid #cc4400;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+          }
+
+          #player::after {
+            content: '🛫';
+            position: absolute;
+            font-size: 2.5rem;
+            display: block;
+          }
+
+          .falling {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            z-index: 5;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+          }
+
+          .good {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) hue-rotate(120deg) brightness(1.1);
+          }
+
+          .good::before {
+            content: '✈️';
+            display: block;
+          }
+
+          .bad {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) hue-rotate(-30deg) brightness(0.9);
+          }
+
+          .bad::before {
+            content: '🚁';
+            display: block;
+          }
+
+          #gameOverScreen {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            z-index: 100;
+            border-radius: 1rem;
+          }
+
+          #gameOverScreen h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+          }
+
+          .game-status {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          .game-status div {
+            color: #004e89;
+            font-weight: 700;
+          }
+
+          #startBtn,
+          #restartBtn {
+            min-width: 160px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            border: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+          }
+
+          #startBtn:hover,
+          #restartBtn:hover {
+            background: linear-gradient(135deg, #ff5520 0%, #ff7a35 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+          }
+
+          .text-center h1 {
+            color: #000000
+          }
+
+          .text-center .lead {
+            color: #000000;
+            font-weight: 500;
+          }
+
+          .navbar {
+            background: linear-gradient(135deg, #004e89 0%, #0077be 50%, #1a9fb1 100%) !important;
+            box-shadow: 0 4px 15px rgba(0, 77, 137, 0.3);
+            border-bottom: 4px solid #003d6b;
+            padding: 1rem 0;
+          }
+
+          .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+          }
+
+          .navbar-brand::before {
+            content: '✈️';
+            font-size: 2rem;
+            display: block;
+          }
+
+          .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          }
+
+          .navbar-nav .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          }
+
+          .navbar-nav .nav-link.active {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+          }
+
+          .navbar-toggler {
+            border: 2px solid #fff !important;
+          }
+
+          .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+          }
+        </style>
+    </head>
+    <body class="bg-light">
+        <main class="game-page">
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html">Airplanes</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                            <li class="nav-item"><a class="nav-link" href="index.html">🛫 Airplanes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="resume.html">📄 Resume</a></li>
+                            <li class="nav-item"><a class="nav-link" href="scratch.html">📝 Scratch</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container px-5">
+                <div class="text-center mb-5">
+                    <h1 class="display-6 fw-bolder">Catch the Falling Objects</h1>
+                    <p class="lead text-muted mx-auto" style="max-width: 640px;">Press Start, then use the left/right arrows or A/D to catch airplanes and avoid the helicopters. The game will begin only after you press the button.</p>
+                </div>
+
+                <div id="gameContainer" class="text-center">
+                    <div class="game-status mb-3">
+                        <div class="fw-bold">Score: <span id="score">0</span></div>
+                        <div class="fw-bold">Lives: <span id="lives">3</span></div>
+                        <div class="fw-bold">Combo: <span id="combo">0</span></div>
+                    </div>
+
+                    <div id="gameArea">
+                        <div id="player"></div>
+                        <div id="gameOverScreen">
+                            <h2>Game Over</h2>
+                            <p id="finalScore" class="fs-5"></p>
+                            <button id="restartOverlayBtn" class="btn btn-light btn-lg">Restart</button>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+                        <button id="startBtn" class="btn btn-primary btn-lg">Start Game</button>
+                        <button id="restartBtn" class="btn btn-outline-primary btn-lg" style="display:none;">Restart</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+          const player = document.getElementById("player");
+          const gameArea = document.getElementById("gameArea");
+          const scoreDisplay = document.getElementById("score");
+          const livesDisplay = document.getElementById("lives");
+          const comboDisplay = document.getElementById("combo");
+          const gameOverScreen = document.getElementById("gameOverScreen");
+          const finalScoreText = document.getElementById("finalScore");
+          const startButton = document.getElementById("startBtn");
+          const restartButton = document.getElementById("restartBtn");
+          const restartOverlayBtn = document.getElementById("restartOverlayBtn");
+
+          let playerX = 160;
+          let score = 0;
+          let lives = 3;
+          let combo = 0;
+          let speed = 3;
+          let gameOver = true;
+          let spawnRate = 1000;
+
+          
+          document.addEventListener("keydown", movePlayer);
+
+          function movePlayer(e) {
+            if (gameOver) return;
+
+            if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") playerX -= 25;
+            if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") playerX += 25;
+
+            playerX = Math.max(0, Math.min(320, playerX));
+            player.style.left = playerX + "px";
+          }
+
+          function createObject() {
+            if (gameOver) return;
+
+            const obj = document.createElement("div");
+            obj.classList.add("falling");
+            const isBad = Math.random() < 0.2;
+            obj.classList.add(isBad ? "bad" : "good");
+            obj.style.left = Math.random() * 380 + "px";
+            gameArea.appendChild(obj);
+
+            const fallInterval = setInterval(() => {
+              if (gameOver) {
+                clearInterval(fallInterval);
+                obj.remove();
+                return;
+              }
+
+              const top = obj.offsetTop;
+              obj.style.top = top + speed + "px";
+
+              const hit =
+                top > 440 &&
+                obj.offsetLeft < playerX + 100 &&
+                obj.offsetLeft + 40 > playerX;
+
+              if (hit) {
+                if (obj.classList.contains("good")) {
+                  combo++;
+                  score += 1 + combo;
+                } else {
+                  combo = 0;
+                  lives--;
+                }
+                updateUI();
+                obj.remove();
+                clearInterval(fallInterval);
+              }
+
+              if (top > 520) {
+                if (obj.classList.contains("good")) {
+                  combo = 0;
+                  lives--;
+                }
+                updateUI();
+                obj.remove();
+                clearInterval(fallInterval);
+              }
+
+              if (lives <= 0) endGame();
+            }, 20);
+          }
+
+          function updateUI() {
+            scoreDisplay.textContent = score;
+            livesDisplay.textContent = lives;
+            comboDisplay.textContent = combo;
+          }
+
+          function startGame() {
+            if (!gameOver) return;
+            gameOver = false;
+            score = 0;
+            lives = 3;
+            combo = 0;
+            speed = 3;
+            spawnRate = 1000;
+            playerX = 160;
+            player.style.left = playerX + "px";
+            gameOverScreen.style.display = "none";
+            startButton.style.display = "none";
+            restartButton.style.display = "none";
+            updateUI();
+            spawnLoop();
+          }
+
+          function endGame() {
+            gameOver = true;
+            finalScoreText.textContent = "Final Score: " + score;
+            gameOverScreen.style.display = "flex";
+            restartButton.style.display = "inline-block";
+          }
+
+          function restartGame() {
+            document.querySelectorAll('.falling').forEach(item => item.remove());
+            gameOver = true;
+            startButton.style.display = "inline-block";
+            restartButton.style.display = "none";
+            gameOverScreen.style.display = "none";
+            score = 0;
+            lives = 3;
+            combo = 0;
+            updateUI();
+          }
+
+          function spawnLoop() {
+            if (gameOver) return;
+            createObject();
+            spawnRate = Math.max(300, spawnRate - 10);
+            setTimeout(spawnLoop, spawnRate);
+          }
+
+          setInterval(() => {
+            if (!gameOver) speed += 0.1;
+          }, 5000);
+
+          startButton.addEventListener('click', startGame);
+          restartButton.addEventListener('click', restartGame);
+          restartOverlayBtn.addEventListener('click', restartGame);
+        </script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="startbootstrap-grayscale-gh-pages/js/scripts.js"></script>
+    </body>
+</html>
