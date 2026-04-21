@@ -1,0 +1,133 @@
+/* Custom Resume Theme - Airplane Blue/Orange Professional */
+body {
+  background: linear-gradient(180deg, #0077be 0%, #1a9fb1 50%, #90ee90 100%);
+  font-family: 'Nunito', 'Segoe UI', Arial, sans-serif;
+  color: #003d6b;
+  margin: 0;
+  padding: 0;
+}
+
+.resume-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  background: rgba(255,255,255,0.97);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,77,137,0.12);
+  padding: 3rem 2.5rem;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.resume-header h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #004e89;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+.resume-header h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ff6b35;
+  margin-bottom: 0.5rem;
+}
+.resume-header p {
+  color: #1a9fb1;
+  font-size: 1.1rem;
+}
+
+.resume-section {
+  margin-bottom: 2.2rem;
+}
+.resume-section h3 {
+  color: #0077be;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-left: 5px solid #ff8c42;
+  padding-left: 0.7rem;
+  margin-bottom: 1rem;
+}
+.resume-section ul, .resume-section ol {
+  padding-left: 1.5rem;
+}
+.resume-section li {
+  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+}
+.resume-section .job-title {
+  color: #004e89;
+  font-weight: 700;
+  font-size: 1.13rem;
+}
+.resume-section .job-date {
+  color: #ff6b35;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+.resume-section .job-location {
+  color: #1a9fb1;
+  font-size: 0.98rem;
+  margin-left: 0.5rem;
+}
+.resume-section .edu-degree {
+  color: #004e89;
+  font-weight: 700;
+}
+.resume-section .edu-date {
+  color: #ff8c42;
+  font-size: 0.98rem;
+  margin-left: 0.5rem;
+}
+.resume-section .edu-school {
+  color: #1a9fb1;
+  font-size: 1.05rem;
+  margin-left: 0.5rem;
+}
+.resume-section .skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.2rem;
+  margin-top: 0.7rem;
+}
+.resume-section .skills-list span {
+  background: #e0f6ff;
+  color: #0077be;
+  border-radius: 0.7rem;
+  padding: 0.4rem 1.1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,77,137,0.07);
+}
+.resume-footer {
+  text-align: center;
+  color: #004e89;
+  font-size: 1rem;
+  margin-top: 2.5rem;
+  opacity: 0.7;
+}
+
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .resume-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .resume-header h1 {
+    font-size: 2rem;
+  }
+  .resume-section h3 {
+    font-size: 1.1rem;
+  }
+}

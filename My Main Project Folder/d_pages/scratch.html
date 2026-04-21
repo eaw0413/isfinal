@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Scratch Page</title>
+    <link rel="stylesheet" href="startbootstrap-grayscale-gh-pages/css/custom.css">
+    <style>
+
+      .navbar {
+        background: linear-gradient(135deg, #004e89 0%, #0077be 50%, #1a9fb1 100%) !important;
+        box-shadow: 0 4px 15px rgba(0, 77, 137, 0.3);
+        border-bottom: 4px solid #003d6b;
+        padding: 1rem 0;
+        width: 100%;
+        align-self: stretch;
+      }
+
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #fff !important;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+      }
+
+      .navbar-brand::before {
+        content: '✈️';
+        font-size: 2rem;
+        display: block;
+      }
+
+      .navbar-nav .nav-link {
+        color: #fff !important;
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem !important;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-nav .nav-link.active {
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+      }
+
+      .navbar-toggler {
+        border: 2px solid #fff !important;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      /* Main content container */
+      .content {
+        margin-top: 6rem;
+        max-width: 800px;
+        width: 100%;
+      }
+
+      /* Center iframe */
+      iframe {
+        display: block;
+        margin: 1.5rem auto;
+      }
+
+      /* Improve spacing */
+      p, li {
+        line-height: 1.6;
+      }
+
+      ol, ul {
+        display: inline-block;
+        text-align: left;
+      }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+    <div class="nav-container">
+        <a class="navbar-brand" href="index.html">Airplanes</a>
+
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="index.html">🛫 Airplanes</a></li>
+            <li><a class="nav-link" href="resume.html">📄 Resume</a></li>
+            <li><a class="nav-link" href="game.html">🎮 Game</a></li>
+        </ul>
+    </div>
+</nav>
+    <div class="content">
+        <h1 id="top">My favorite Hymn from the Tabernacle Choir at Temple Square</h1>
+
+        <iframe 
+            width="560" height="315" 
+            src="https://www.youtube.com/embed/r2DSTWiKULw" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allowfullscreen>
+        </iframe>
+
+        <div class="resume-section">
+    <h1>Love Divine, All Loves Excelling</h1>
+    <p>
+        I love this hymn because it reminds me of the Savior and how He is
+        always there for us. The music is beautiful and uplifting, and it helps me
+        feel closer to God. I also love the lyrics, which talk about how Jesus is
+        our friend and how He will never leave us alone. This hymn is a great
+        reminder of the love and support that we can find in Jesus Christ.
+    </p>   
+</div>
+
+<div class="resume-container">
+    <img src="startbootstrap-grayscale-gh-pages/assets/img/jessica1.jpg" 
+         class="img-fluid d-block mx-auto" 
+         alt="My Beautiful Fiancee" 
+         width="50%">
+</div>
+
+<div class="resume-section">
+    Our Family
+    <br>
+    <ol>
+        <li>Jessica    
+            <br>
+            <ul>
+                <li>Virtuous</li>
+                <li>Altruistic</li>
+                <li>Faithful</li>
+            </ul>
+        </li>
+        <li>Eric
+            <br>
+            <ul>
+                <li>Loving</li>
+                <li>Bestest</li>
+                <li>Hardworking</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+</body>
+</html>
